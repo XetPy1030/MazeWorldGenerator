@@ -1,19 +1,25 @@
+photo_maze = "maze.png"
+m_wi = 80 #maze width
+m_he = 80 #maze height
+world_dir = "world"
+
+
+
+
+
 import bedrock, os
 import struct, time
 from PIL import Image, ImageDraw
 
-image = Image.open('maze.png')  # Открываем изображение
+image = Image.open(photo_maze)  # Открываем изображение
 draw = ImageDraw.Draw(image)  # Создаем инструмент для рисования
 width = image.size[0]  # Определяем ширину
 height = image.size[1]  # Определяем высоту
 pix = image.load()  # Выгружаем значения пикселей
 
-image1 = Image.open('maze.png')  # Открываем изображение
+image1 = Image.open(photo_maze)  # Открываем изображение
 draw1 = ImageDraw.Draw(image1)  # Создаем инструмент для рисования
 pix1 = image1.load()  # Выгружаем значения пикселей
-
-m_wi = 80
-m_he = 80
 
 for i in range((m_wi+1)*2):
     for o in range((m_he+1)*2):
@@ -54,78 +60,20 @@ for i in range(m_wi+1):
 #draw.point((79, 160), (0, 0, 0))
 image.save("test.png", "PNG") #не забываем сохранить изображение
 #image1.save("test1.png", "PNG")
-
-coord = [81, 160]
-finish = [79, 0]
-t = 0
-dist = 0
-turn = ["u", "r", "d", "l"]
-played = True
-def next_l(t):
-    t-=1
-    if t == -1:
-        t = 3
-    return t
-def next_r(t):
-    t+=1
-    if t == 4:
-        t = 0
-    return t
-def coords(turn, t):
-    #print(t)
-    if turn[t] in ["u", "d"]:
-        return [[1, 0], [0, 1], [-1, 0], [0, -1]]
-    elif turn[t] in ["l", "r"]:
-        return [[0, -1], [1, 0], [0, 1], [-1, 0]]
-
-def check_u(pix, coord):
-    if pix[coord[0], coord[1]-1][0] == 255:
-        return 0
-    else:
-        return check_r(pix, coord)
-def check_r(pix, coord):
-    if pix[coord[0]+1, coord[1]][0] == 255:
-        return 1
-    else:
-        return check_d(pix, coord)
-def check_d(pix, coord):
-    if pix[coord[0], coord[1]+1][0] == 255:
-        return 2
-    else:
-        return check_l(pix, coord)
-def check_l(pix, coord):
-    if pix[coord[0]-1, coord[1]][0] == 255:
-        return 3
-    else:
-        return check_u(pix, coord)
-#["u", "r", "d", "l"]
-def move(t, dist, coord):
-    dist+=1
-    if t == 0:
-        coord[1] -= 1
-    elif t == 1:
-        coord[0] +=1
-    elif t == 2:
-        coord[1] +=1
-    elif t == 3:
-        coord[0] -=1
-    return dist, coord
-checks = [check_l, check_u, check_r, check_d]
-#по левой стенке
-while played:
-    if coord == finish:
-        print(dist)
-        played = False
-    else:
-        try:
-            t = checks[t](pix, coord)
-            dist, coord = move(t, dist, coord)
-            #print(dist)
-            #print(coord, " ", pix[coord[0], coord[1]], " ", t)
-        except Exception as e:
-            print(e)
-            break
-        #draw.point((coord[0], coord[1]), (255, 0, 0))
-        #image.save("test.png", "PNG")
-        #draw.point((coord[0], coord[1]), (255, 255, 255))
-        #time.sleep(2)
+#0, 16
+brick_block = bedrock.Block("minecraft:brick_block")
+oak_planks = bedrock.Block("minecraft:planks")
+glass = bedrock.Block("minecraft:glass")
+with bedrock.World(os.getcwd()+"\\{}\\".format(world_dir)) as world:
+    for i in range(m_wi*2+1):
+        for o in range(m_he*2+1):
+            print(i, " ", o)
+            if pix[i, o][0] == 0:
+                world.setBlock(i, 3, o, brick_block)
+                world.setBlock(i, 4, o, oak_planks)
+                world.setBlock(i, 5, o, oak_planks)
+                world.setBlock(i, 6, o, oak_planks)
+                world.setBlock(i, 7, o, oak_planks)
+            else:
+                world.setBlock(i, 3, o, brick_block)
+                world.setBlock(i, 7, o, glass)

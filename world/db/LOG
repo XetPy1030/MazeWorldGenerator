@@ -1,0 +1,11 @@
+2021/08/13-21:16:26.748 c50 Recovering log #12
+2021/08/13-21:16:26.749 c50 Level-0 table #15: started
+2021/08/13-21:16:26.760 c50 Level-0 table #15: 13015 bytes OK
+2021/08/13-21:16:26.761 c50 Delete type=0 #12
+2021/08/13-21:16:26.761 c50 Delete type=3 #10
+2021/08/13-21:16:26.910 b64 Compacting 1@0 + 1@1 files
+2021/08/13-21:16:26.987 b64 Generated table #17@0: 7792 keys, 100262 bytes
+2021/08/13-21:16:26.987 b64 Compacted 1@0 + 1@1 files => 100262 bytes
+2021/08/13-21:16:26.988 b64 compacted to: files[ 0 1 0 0 0 0 0 ]
+2021/08/13-21:16:26.988 b64 Delete type=2 #13
+2021/08/13-21:16:26.988 b64 Delete type=2 #15

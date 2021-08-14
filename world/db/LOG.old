@@ -1,0 +1,11 @@
+2021/08/13-20:21:21.905 afc Recovering log #7
+2021/08/13-20:21:21.945 afc Level-0 table #11: started
+2021/08/13-20:21:21.994 afc Level-0 table #11: 88478 bytes OK
+2021/08/13-20:21:21.995 afc Delete type=0 #7
+2021/08/13-20:21:21.995 afc Delete type=3 #4
+2021/08/13-20:21:22.762 72c Compacting 1@0 + 1@1 files
+2021/08/13-20:21:22.858 72c Generated table #13@0: 7550 keys, 89462 bytes
+2021/08/13-20:21:22.858 72c Compacted 1@0 + 1@1 files => 89462 bytes
+2021/08/13-20:21:22.858 72c compacted to: files[ 0 1 0 0 0 0 0 ]
+2021/08/13-20:21:22.859 72c Delete type=2 #9
+2021/08/13-20:21:22.859 72c Delete type=2 #11

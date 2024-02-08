@@ -1,6 +1,8 @@
 from PIL import Image
 
-from config import MAZE_IMAGE_PATH, MAZE_WIDTH, MAZE_HEIGHT
+import bedrock
+import blocks
+from config import MAZE_IMAGE_PATH, MAZE_WIDTH, MAZE_HEIGHT, WALL_BLOCKS, Y_OFFSET, HALLWAY_BLOCKS
 
 
 def get_maze():
@@ -42,3 +44,21 @@ def get_maze():
             maze[o * 2][i * 2] = 1
 
     return maze
+
+
+def maze_to_world(world_path, maze):
+    with bedrock.World(world_path) as world:
+        for y, y_val in enumerate(maze):
+            for x, x_val in enumerate(y_val):
+                set_blocks_to_maze(
+                    world, x, y,
+                    WALL_BLOCKS if x_val else HALLWAY_BLOCKS
+                )
+
+
+def set_blocks_to_maze(world, x, y, list_blocks):
+    for y_offset, block in enumerate(list_blocks):
+        if block is blocks.AIR:
+            continue
+
+        world.setBlock(x, Y_OFFSET + y_offset, y, block)

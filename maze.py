@@ -5,7 +5,7 @@ import blocks
 from config import MAZE_IMAGE_PATH, MAZE_WIDTH, MAZE_HEIGHT, WALL_BLOCKS, Y_OFFSET, HALLWAY_BLOCKS
 
 
-def get_maze():
+def get_maze_from_image():
     image = Image.open(MAZE_IMAGE_PATH)
     pix = image.load()
     width, height = image.size
